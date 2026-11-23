@@ -50,7 +50,7 @@
   }
   function areaCards() {
     return `<div class="areas">${AREAS.map(a => {
-      const {active, changes} = areaStats(a), latest = active.length && active[active.length - 1].items.find(([k]) => k === a);
+      const {active, changes} = areaStats(a), latest = active.flatMap(w => w.items).filter(([k]) => k === a).pop();  // skips draft weeks (no items)
       return `<a class="area card" href="${areaHref(a)}"><h3>${dot(a)}${label(a)}</h3>
         <span class="meta">${plural(changes, 'change')} · ${plural(active.length, 'week')}</span>${latest ? `<p>${esc(latest[1])}</p>` : ''}</a>`;
     }).join('')}</div>`;
