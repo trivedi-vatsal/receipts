@@ -1,0 +1,103 @@
+{
+ "title": "Alex Moreno at Acme",
+ "eyebrow": "Demo · made-up data",
+ "lede": "What Alex shipped this autumn, week by week. Every item here comes from a dated code change, pull request or measurement.",
+ "footer": "This is a demo of receipts with fictional data. Alex Moreno and Acme are made up.",
+ "updated": "2026-11-23",
+ "areas": {
+  "payments": "Payments",
+  "search": "Search",
+  "platform": "Reliability",
+  "tooling": "Developer tooling"
+ },
+ "repos": {
+  "acme/payments": "payments",
+  "acme/search-service": "search",
+  "acme/infra": "platform",
+  "acme/ci-tools": "tooling"
+ },
+ "stats": [
+  ["3", "measured improvements shipped"],
+  ["22 min", "to resolve the one incident"]
+ ],
+ "results": [
+  ["38 s → 6 s", "<b>Search results on busy days (slowest 5% of loads).</b> A missing database index, found and added in early November."],
+  ["2.1% → 0.4%", "<b>Card payments that fail at checkout.</b> Temporary bank declines are now retried automatically. Measured over two weeks."],
+  ["14 → 5 min", "<b>Wait for automated checks on each code change.</b> Median over 120 changes."]
+ ],
+ "attention": [
+  ["decide", "Retire the old search endpoint?", "Two internal tools still call it. Retiring it removes about 900 lines of code and one on-call alert; the owners of both tools need to agree on a date."],
+  ["decide", "Faster checks cost about 8% more", "Running tests on 4 machines instead of 1 saves 9 minutes per change. Keep it, or drop to 3 machines for a smaller saving?"],
+  ["fix", "Six unreliable tests need owners", "They were set aside so they stop blocking work. Each needs a team to fix or delete it."]
+ ],
+ "terms": [
+  ["Code change", "One saved step of work in the code (a commit)."],
+  ["Slowest 5%", "The page loads that take longer than 95 out of 100 others. It shows what customers feel on a bad day."],
+  ["Automated checks", "Tests that run on every code change before it can be merged."],
+  ["Draft week", "Counted automatically from the code history; the plain-language write-up comes with the next update."]
+ ],
+ "weeks": [
+  {
+   "start": "2026-10-12", "end": "2026-10-19",
+   "commits": {"payments": 9, "search": 3, "platform": 2},
+   "headline": "Failed card payments get a second chance",
+   "items": [
+    ["payments", "Built automatic retries for card payments the bank declines for temporary reasons, switched off until tested."],
+    ["payments", "Made sure a retried payment can never charge a customer twice."],
+    ["search", "Started tracking slow searches after support reported complaints."],
+    ["platform", "Stopped the payments service restarting under heavy load."]
+   ]
+  },
+  {
+   "start": "2026-10-19", "end": "2026-10-26",
+   "commits": {"payments": 12, "platform": 4, "tooling": 2},
+   "headline": "Payment retries live for half of customers",
+   "items": [
+    ["payments", "Turned retries on for 10% of customers, then 50%. Failed payments in that group dropped from 2.1% to 1.2% in the first three days."],
+    ["payments", "Customers now get a payment-failed email only after the last attempt, not the first."],
+    ["platform", "Added an alert if retries start piling up."],
+    ["tooling", "Wrote a report of the slowest automated checks, to pick what to speed up next."]
+   ]
+  },
+  {
+   "start": "2026-10-26", "end": "2026-11-02",
+   "commits": {"search": 8, "payments": 3, "platform": 5},
+   "headline": "Found why search got slow, and fixed it in testing",
+   "items": [
+    ["search", "Traced slow searches to a missing database index after an October change. The fix cut the slowest loads from 38 to 9 seconds in testing."],
+    ["payments", "Payment retries now on for all customers, after finance approved the fees."],
+    ["platform", "Settings that would take a service down are now rejected before they go out."],
+    ["platform", "Search updates now go to a small share of traffic first."]
+   ],
+   "note": "<b>Incident, Oct 28.</b> Search was down for 22 minutes after a settings change. Alex rolled it back, wrote the review, and added the check that now blocks that kind of change."
+  },
+  {
+   "start": "2026-11-02", "end": "2026-11-09",
+   "commits": {"search": 11, "payments": 2, "tooling": 4},
+   "headline": "Search is six times faster for customers",
+   "items": [
+    ["search", "The search fix went live. On busy days the slowest loads went from 38 seconds to 6."],
+    ["search", "Tested double the normal traffic; search stayed under 7 seconds."],
+    ["payments", "Final numbers: failed card payments fell from 2.1% to 0.4% over two weeks."],
+    ["tooling", "Tried caching for the automated checks: 14 minutes down to 9 on a test branch."]
+   ]
+  },
+  {
+   "start": "2026-11-09", "end": "2026-11-16",
+   "commits": {"tooling": 9, "platform": 6, "payments": 2},
+   "headline": "Automated checks now take 5 minutes, down from 14",
+   "items": [
+    ["tooling", "Spread the automated checks across 4 machines and cached the slow setup step. The median wait per change fell from 14 to 5 minutes."],
+    ["tooling", "Set aside six unreliable tests so they no longer block everyone's work."],
+    ["platform", "The machines that run the checks now scale with demand, with an alert on cost."],
+    ["payments", "Fixed payment-failed emails going out in the wrong language."]
+   ]
+  },
+  {
+   "start": "2026-11-16", "end": "2026-11-23", "draft": true,
+   "commits": {"payments": 5, "search": 3, "platform": 2},
+   "headline": "10 code changes in 3 repos, not written up yet",
+   "items": []
+  }
+ ]
+}
