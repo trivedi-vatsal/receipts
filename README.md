@@ -1,6 +1,6 @@
 # receipts
 
-Proof of what you shipped: every claim dated and backed by a commit, PR or measured result. Once a week, Claude Code reads your git history and your Claude Code sessions, then writes up what you shipped: dated, with commit hashes, PRs and measured results. You end up with a running record for performance reviews, promotion packets and 1:1s, plus a plain-language page you can show a manager.
+Proof of what you shipped. Once a week, Claude Code reads your git history and your Claude Code sessions and writes up what you shipped, with every claim dated and backed by a commit hash, PR or measured result. You end up with a running record for performance reviews, promotion packets and 1:1s, plus a plain-language page you can show a manager.
 
 Everything runs locally. Nothing is uploaded anywhere.
 
@@ -83,10 +83,7 @@ echo "Summarise this session: goal, decisions and why, what shipped, numbers mea
   claude -p --resume <session-id> --fork-session --disallowedTools "Edit Write NotebookEdit Bash"
 ```
 
-- **Read-only:** the fork cannot edit files or run commands.
-- **Not counted as work:** the collector skips any session that starts from this prompt.
-- **Reused:** an existing summary file is never redone.
-- **Later:** the no-AI route skips them; `--summarise evidence/<window>` writes them afterwards (Claude usage, up to 4 in parallel).
+The fork is read-only: it can't edit files or run commands. The collector skips any session that starts with this prompt, so the summaries never count as work, and it never redoes a summary file that already exists. The no-AI route skips summaries altogether; `--summarise evidence/<window>` writes them later (this uses Claude, up to 4 at a time).
 
 ## Weekly schedule (optional, macOS)
 
@@ -107,6 +104,6 @@ The procedure tells Claude to credit only your own commits and sessions, to date
 
 ## Customize
 
-- **Writing style and sections**: edit `.claude/commands/weekly-update.md`.
-- **Share pages**: all content is `share/data.json` (`title`, `eyebrow`, `lede`, `footer`, `updated`, `areas`, `stats`, `results`, `attention`, `terms`, `weeks`). After editing it by hand, run `python3 scripts/build-share.py`: it checks the file and rebuilds `share/data.js`. Layout and colours are in `share/style.css`, rendering in `share/app.js`.
-- **New project file layout**: `topics/_TEMPLATE.md`.
+- To change the writing style and sections, edit `.claude/commands/weekly-update.md`.
+- The share pages get all their content from `share/data.json` (`title`, `eyebrow`, `lede`, `footer`, `updated`, `areas`, `stats`, `results`, `attention`, `terms`, `weeks`). After editing it by hand, run `python3 scripts/build-share.py`: it checks the file and rebuilds `share/data.js`. Layout and colours are in `share/style.css`, rendering in `share/app.js`.
+- The layout for a new project file is `topics/_TEMPLATE.md`.
