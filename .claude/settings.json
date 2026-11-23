@@ -1,0 +1,21 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python3 scripts/collect.py)",
+      "Bash(python3 scripts/collect.py --mark-done)",
+      "Bash(python3 scripts/collect.py --no-summaries)",
+      "Bash(python3 scripts/collect.py --summarise *)",
+      "Bash(python3 scripts/draft.py)",
+      "Bash(python3 scripts/draft.py *)",
+      "Bash(python3 scripts/build-share.py)",
+      "Bash(git -C * log *)",
+      "Bash(git -C * show *)",
+      "Bash(gh pr view *)",
+      "Read(~/code/**)",
+      "Edit(./topics/**)",
+      "Edit(./weekly/**)",
+      "Edit(./share/**)",
+      "Agent"
+    ]
+  }
+}

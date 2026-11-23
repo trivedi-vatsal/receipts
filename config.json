@@ -1,0 +1,8 @@
+{
+  "name": "Your Name",
+  "org": "Acme",
+  "code_dir": "~/code",
+  "match": "acme|another-work-repo",
+  "authors": ["you@acme.com", "your-github-handle"],
+  "pronouns": "they/them"
+}

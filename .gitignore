@@ -1,0 +1,5 @@
+# Raw evidence holds your unredacted prompts and assistant replies. Keep it local.
+evidence/
+weekly/logs/
+.claude/settings.local.json
+.DS_Store
