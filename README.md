@@ -4,7 +4,7 @@ Proof of what you shipped: every claim dated and backed by a commit, PR or measu
 
 Everything runs locally. Nothing is uploaded anywhere.
 
-**[Live demo](https://vatsal.xyz/receipts/)**: the share pages filled with six weeks of made-up data for a fictional engineer.
+**[Live demo](https://vatsal.xyz/receipts/demo/)**: the share pages filled with six weeks of made-up data for a fictional engineer.
 
 ```
 config.json    who you are and which repos count as work  ← edit this first
