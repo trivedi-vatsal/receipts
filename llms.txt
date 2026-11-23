@@ -1,0 +1,45 @@
+# receipts
+
+> A GitHub template that keeps a weekly, evidence-backed record of what you shipped. Once a week, Claude Code reads your git history and your Claude Code sessions and writes up the work, with dates, commit hashes, PRs and measured results. The output is a running record for performance reviews, promotion packets and 1:1s, plus plain-language pages you can show a manager. Everything runs locally; nothing is uploaded. MIT licensed.
+
+How it works:
+
+- `./scripts/run-weekly.sh --no-ai` collects evidence (commits, +/- lines, PRs, ticket keys, Claude Code sessions, test results) and writes a facts-only draft note. No AI, no tokens.
+- `/weekly-update` in Claude Code writes up every pending draft, oldest first: a dated weekly note, the per-project topic files and the share pages.
+- `./scripts/run-weekly.sh` does both unattended; on macOS a launchd job runs it on Mondays at 10:00. On Linux, use cron.
+- Each run covers everything since the last one (`state.json`), so a missed week just makes the next window longer. The first run covers the last 30 days.
+
+Requirements: Claude Code, Python 3 and git. The GitHub CLI (`gh`) is optional and is used to read PR details. Keep your copy private: it describes your employer's work.
+
+Outputs:
+
+- `weekly/<since>_to_<until>.md`: one engineering-level note per week.
+- `topics/NN-*.md`: one living file per project.
+- `share/`: static pages for non-technical readers (Summary, Timeline, Week, Area). They make no network requests and work straight from disk.
+
+Passwords, tokens, keys, private IPs and connection strings are redacted from the collected evidence. Only the user's own commits and sessions are credited.
+
+## Docs
+
+- [README](https://raw.githubusercontent.com/trivedi-vatsal/receipts/main/README.md): setup, configuration keys, running, scheduling and customizing
+- [The /weekly-update procedure](https://raw.githubusercontent.com/trivedi-vatsal/receipts/main/.claude/commands/weekly-update.md): the write-up rules Claude follows
+- [config.json](https://raw.githubusercontent.com/trivedi-vatsal/receipts/main/config.json): who you are and which repos count as work (edit this first)
+
+## Demo
+
+- [Live demo](https://vatsal.xyz/receipts/demo/): the share pages filled with six weeks of made-up data for a fictional engineer
+- [Demo data](https://vatsal.xyz/receipts/demo/data.json): the share/data.json that drives the demo pages
+
+## Source
+
+- [GitHub repository](https://github.com/trivedi-vatsal/receipts)
+- [Create a copy from the template](https://github.com/trivedi-vatsal/receipts/generate)
+- [scripts/collect.py](https://raw.githubusercontent.com/trivedi-vatsal/receipts/main/scripts/collect.py): gathers evidence from git and Claude Code sessions, with redaction
+- [scripts/draft.py](https://raw.githubusercontent.com/trivedi-vatsal/receipts/main/scripts/draft.py): writes the facts-only weekly draft
+- [scripts/build-share.py](https://raw.githubusercontent.com/trivedi-vatsal/receipts/main/scripts/build-share.py): validates share/data.json and builds share/data.js
+
+## Optional
+
+- [scripts/run-weekly.sh](https://raw.githubusercontent.com/trivedi-vatsal/receipts/main/scripts/run-weekly.sh): the headless weekly run
+- [topics/_TEMPLATE.md](https://raw.githubusercontent.com/trivedi-vatsal/receipts/main/topics/_TEMPLATE.md): layout for a new project file
+- [LICENSE](https://raw.githubusercontent.com/trivedi-vatsal/receipts/main/LICENSE): MIT

@@ -157,3 +157,21 @@ footer { color: var(--muted); font-size: 13px; border-top: 1px solid var(--line)
   main.wrap { padding-block: 0; gap: 28px; }
   .card, .week, .results li { break-inside: avoid; }
 }
+
+/* Demo site only: the demo banner and the page nav stay pinned together at the top. */
+html { scroll-padding-top: 110px; }
+.demohead { position: sticky; top: 0; z-index: 5; }
+.demohead .top { position: static; }
+.demobar { background: #0a0a0a; color: #d4d4d4; border-bottom: 1px solid #2a2a2a; font-size: 13px; }
+.demobar .wrap { display: flex; align-items: center; gap: 10px; min-height: 42px; }
+.demobar .tag { flex: none; min-width: 0; margin: 0; font: 600 11px/1 var(--mono); letter-spacing: .12em; text-transform: uppercase; color: #1e1b04; background: #ebd800; padding: 5px 7px; border-radius: 5px; }
+.demobar .txt { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.demobar .acts { margin-left: auto; display: flex; gap: 14px; align-items: center; flex: none; }
+.demobar a { color: #fafafa; text-decoration: none; }
+.demobar a:hover { text-decoration: underline; }
+.demobar a.cta { color: #1e1b04; background: #ebd800; padding: 6px 12px; border-radius: 999px; font-weight: 600; }
+.demobar a.cta:hover { background: #fae94b; text-decoration: none; }
+.demobar a:focus-visible { outline-color: #ebd800; }
+@media (max-width: 600px) { .demobar .txt { display: none; } }
+@media (max-width: 380px) { .demobar a.cta { display: none; } }
+@media print { .demohead { position: static; } .demobar { display: none; } }
